@@ -36,6 +36,13 @@ export default class App extends React.Component {
     })
   }
 
+  onPressDelete(index) {
+    // console.log('onPressDelete')
+    this.setState({
+      todos: this.state.todos.filter((t, i) => i !== index)
+    })
+  }
+
   render() {
     console.log(this.state)
     return (
@@ -52,7 +59,10 @@ export default class App extends React.Component {
           >
             <Text style={styles.addButtonText}>ADD</Text>
           </TouchableOpacity>
-          <TodoList todos={this.state.todos} />
+          <TodoList
+            todos={this.state.todos}
+            onPressDelete={(index) => this.onPressDelete(index)}
+          />
         </View>
       </SafeAreaView>
     );
