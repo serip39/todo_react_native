@@ -10,21 +10,12 @@ import React, {Fragment} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
   TextInput,
   TouchableOpacity
 } from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import TodoList from './TodoList';
 
 export default class App extends React.Component {
   state = {
@@ -61,15 +52,7 @@ export default class App extends React.Component {
           >
             <Text style={styles.addButtonText}>ADD</Text>
           </TouchableOpacity>
-          <ScrollView style={styles.scrollView}>
-            {
-              this.state.todos.map((todo, index) => (
-                <View key={todo+index} style={styles.todoContainer}>
-                  <Text>{ todo }</Text>
-                </View>
-              ))
-            }
-          </ScrollView>
+          <TodoList todos={this.state.todos} />
         </View>
       </SafeAreaView>
     );
@@ -82,7 +65,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    backgroundColor: Colors.white,
+    backgroundColor: '#FFF',
     flex: 1,
     padding: 30
   },
@@ -100,12 +83,5 @@ const styles = StyleSheet.create({
     color: '#FFF',
     textAlign: 'center',
     fontWeight: 'bold',
-  },
-  scrollView: {
-    backgroundColor: '#ddd',
-  },
-  todoContainer: {
-    backgroundColor: '#FFF',
-    padding: 10,
   }
 });
