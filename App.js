@@ -48,39 +48,42 @@ export default class App extends React.Component {
   render() {
     console.log(this.state)
     return (
-      <Fragment>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={styles.scrollView}>
-            <View style={styles.container}>
-              <TextInput
-                value={this.state.newTodo}
-                style={styles.form}
-                onChangeText={text => this.onChangeText(text)}
-              />
-              <TouchableOpacity
-                style={styles.addButton}
-                onPress={() => this.onPressAdd()}
-              >
-                <Text style={styles.addButtonText}>ADD</Text>
-              </TouchableOpacity>
-            </View>
+      <SafeAreaView style={styles.wrapper}>
+        <View style={styles.container}>
+          <TextInput
+            value={this.state.newTodo}
+            style={styles.form}
+            onChangeText={text => this.onChangeText(text)}
+          />
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={() => this.onPressAdd()}
+          >
+            <Text style={styles.addButtonText}>ADD</Text>
+          </TouchableOpacity>
+          <ScrollView style={styles.scrollView}>
+            {
+              this.state.todos.map((todo, index) => (
+                <View key={todo+index} style={styles.todoContainer}>
+                  <Text>{ todo }</Text>
+                </View>
+              ))
+            }
           </ScrollView>
-        </SafeAreaView>
-      </Fragment>
+        </View>
+      </SafeAreaView>
     );
   }
 
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  wrapper: {
+    flex: 1,
   },
   container: {
     backgroundColor: Colors.white,
+    flex: 1,
     padding: 30
   },
   form: {
@@ -97,5 +100,12 @@ const styles = StyleSheet.create({
     color: '#FFF',
     textAlign: 'center',
     fontWeight: 'bold',
+  },
+  scrollView: {
+    backgroundColor: '#ddd',
+  },
+  todoContainer: {
+    backgroundColor: '#FFF',
+    padding: 10,
   }
 });
